@@ -1,0 +1,25 @@
+{
+	"compilerOptions": {
+		"moduleResolution": "node",
+		"module": "commonjs",
+		"declaration": true,
+		"noImplicitAny": true,
+		"target": "es5",
+		"sourceMap": true,
+		"declaration": true,
+		"strict": true,
+		"outDir": "./",
+		"skipLibCheck": true,
+		"lib": [
+			"es5",
+			"es2015.collection",
+			"es2015.promise",
+			"dom",
+			"webworker",
+			"scripthost"
+		]
+	},
+	"files": [
+		"./index.ts"
+	]
+}

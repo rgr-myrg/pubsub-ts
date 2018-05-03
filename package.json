@@ -1,0 +1,38 @@
+{
+  "name": "pubsub-ts",
+  "version": "1.0.0",
+  "description": "PubSub Messaging Pattern in Typescript",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "tsc && jasmine-ts ./index.spec.ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgr-myrg/pubsub-ts.git"
+  },
+  "keywords": [
+    "typescript",
+    "pubsub",
+    "publisher",
+    "subscriber",
+    "notifier",
+    "event",
+    "emitter",
+    "signal",
+    "messaging",
+    "pattern"
+  ],
+  "author": "solidity@gmx.com <solidity@gmx.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rgr-myrg/pubsub-ts/issues"
+  },
+  "homepage": "https://github.com/rgr-myrg/pubsub-ts#readme",
+  "devDependencies": {
+    "@types/es6-collections": "^0.5.31",
+    "@types/jasmine": "^2.8.6",
+    "jasmine-spec-reporter": "^4.2.1",
+    "jasmine-ts": "^0.2.1"
+  }
+}
