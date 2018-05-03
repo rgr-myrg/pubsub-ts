@@ -19,7 +19,7 @@ export module PubSub {
         private key: string;
         private shouldPost: boolean = false;
 
-        constructor(key: string) {
+        constructor(key: string = '' + new Date().getTime()) {
             this.key = key;
         }
 
@@ -35,12 +35,12 @@ export module PubSub {
             return this.key;
         }
 
-        public startReceivingNotifications(): void {
+        public start(): void {
             this.shouldPost = true;
             this.processNotifications();
         }
 
-        public pauseReceivingNotifications(): void {
+        public pause(): void {
             this.shouldPost = false;
         }
 
@@ -93,15 +93,19 @@ export module PubSub {
         private subscribers: Map<string, Subscriber> = new Map();
 
         public add(subscriber: Subscriber): void {
-            this.subscribers.set(subscriber.getKey(), subscriber);
+            let key: string = subscriber.getKey();
+
+            if (!this.has(key)) {
+                this.subscribers.set(key, subscriber);
+            }
         }
 
-        public delete(key: string): boolean {
-            return this.subscribers.delete(key);
+        public delete(subscriber: Subscriber): void {
+            this.subscribers.delete(subscriber.getKey());
         }
 
-        public get(key: string): Subscriber | undefined {
-            return this.subscribers.get(key);
+        public has(key: string): boolean {
+            return this.subscribers.has(key);
         }
 
         public notify(eventName: string, data: any): void {

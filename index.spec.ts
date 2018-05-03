@@ -1,51 +1,66 @@
 import {PubSub} from "./index";
 
 describe("PubSub Tests", () => {
-    let notifier: PubSub.Publisher;
-    let receiver: PubSub.Subscriber;
-    let receiverKey: string = 'aKey';
-    let receiverSpy: any;
+    let publisher: PubSub.Publisher;
+    let subscriber: PubSub.Subscriber;
+    let subscriberKey: string = 'aKey';
+    let subscriberSpy: any;
     let receivedMsg: string | null;
 
     beforeEach(() => {
-        notifier = new PubSub.Publisher();
-        receiver = new PubSub.Subscriber(receiverKey);
-        receiver.on('postMsg', (notification:Notification) => {
+        publisher = new PubSub.Publisher();
+        subscriber = new PubSub.Subscriber(subscriberKey);
+        subscriber.on('postMsg', (notification:Notification) => {
             receivedMsg = notification.body;
         });
 
-        receiverSpy = spyOn(receiver, "post").and.callThrough();
+        subscriberSpy = spyOn(subscriber, "post").and.callThrough();
         receivedMsg = '';
     });
 
-    it("Publisher.add should register a receiver", () => {
-        notifier.add(receiver);
+    it("Publisher.add should register a subscriber", () => {
+        publisher.add(subscriber);
 
-        expect(notifier.get(receiverKey)).toEqual(receiver);
+        expect(publisher.has(subscriberKey)).toBe(true);
     });
 
-    it("Publisher.delete should remove a receiver", () => {
-        notifier.add(receiver);
-        notifier.delete(receiverKey);
+    it("Publisher.delete should remove a subscriber", () => {
+        publisher.add(subscriber);
+        publisher.delete(subscriber);
 
-        expect(notifier.get(receiverKey)).toBeUndefined();
+        expect(publisher.has(subscriberKey)).toBe(false);
     });
 
     it("Publisher.notify should send the standard notification", () => {
-        receiver.startReceivingNotifications();
+        subscriber.start();
 
-        notifier.add(receiver);
-        notifier.notify('postMsg', 'a message');
+        publisher.add(subscriber);
+        publisher.notify('postMsg', 'a message');
 
-        expect(receiver.post).toHaveBeenCalledTimes(1);
+        expect(subscriber.post).toHaveBeenCalledTimes(1);
         expect(receivedMsg).toEqual('a message');
     });
 
     it("Publisher.notifyUrgent should send the urgent notification", () => {
-        notifier.add(receiver);
-        notifier.notifyUrgent('postMsg', 'urgent message');
+        publisher.add(subscriber);
+        publisher.notifyUrgent('postMsg', 'urgent message');
 
-        expect(receiver.post).toHaveBeenCalledTimes(1);
+        expect(subscriber.post).toHaveBeenCalledTimes(1);
         expect(receivedMsg).toEqual('urgent message');
+    });
+
+    it("Publisher.notify should xxx", () => {
+        let agent: PubSub.Subscriber = new PubSub.Subscriber();
+
+        agent.on('withdraw', (notification: PubSub.Notification) => {
+            let amount: number = notification.body;
+            console.log('[amount]' + notification.body)
+        });
+
+        agent.start();
+        publisher.add(agent);
+        publisher.notify('withdraw', 1500);
+
+        expect(true).toEqual(true);
     });
 });
