@@ -25,7 +25,15 @@ subscriber.on('postMsg', (notification:Notification) => {
 ```typescript
 subscriber.off('postMsg');
 ```
+### Start receiving notifications
+```typescript
+subscriber.start();
+```
 
+### Pause receiving notifications
+```typescript
+subscriber.pause();
+```
 ### Creating a Publisher
 ```typescript
 import {PubSub} from "pubsub-ts";
@@ -64,15 +72,7 @@ When a Subscriber is in the paused state, notifications are pushed into the queu
 
 When a Subscriber is in the started state, the queue will resume processing notifications.
 
-### Start receiving notifications
-```typescript
-subscriber.start();
-```
-
-### Pause receiving notifications
-```typescript
-subscriber.pause();
-```
+**NOTE:** Subscribers are **paused** by default. You must invoke **start()** to enable processing from the queue. This is done so you have explicit control as to _when_ notifications should start being posted to the subscriber.
 
 # Sample
 
