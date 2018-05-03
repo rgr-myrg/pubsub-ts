@@ -17,7 +17,7 @@ let subscriber: PubSub.Subscriber = new PubSub.Subscriber();
 
 ### Registering for Notifications
 ```typescript
-subscriber.on('postMsg', (notification:Notification) => {
+subscriber.on('postMsg', (notification: PubSub.Notification) => {
     this.msg = notification.body;
 });
 ```
