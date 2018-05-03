@@ -85,15 +85,15 @@ class TransactionAgent extends PubSub.Subscriber {
         this.on('withdrawal', this.onWithdrawal);
     }
 
-	public onConnection(notification: PubSub.Notification): void {
-	    if (notification.body.status === 'online') {
-	        // Start receiving notifications
-		    this.start();
-		} else {
-		    // Pause receiving notifications
-		    this.pause();
-		}
-	}
+    public onConnection(notification: PubSub.Notification): void {
+        if (notification.body.status === 'online') {
+            // Start receiving notifications
+            this.start();
+        } else {
+            // Pause receiving notifications
+            this.pause();
+        }
+    }
 
     public onWithdrawal(notification: PubSub.Notification): void {
         let amount: number = notification.body;
@@ -110,7 +110,7 @@ class ATM extends PubSub.Publisher {
         this.notify('withdrawal', amount);
     }
 
-	public connectionChange(status: string): void {
+    public connectionChange(status: string): void {
         this.notify('connectionChange', {status: status});
     }
 }
