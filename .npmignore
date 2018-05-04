@@ -5,10 +5,8 @@
 node_modules/
 spec/
 package-lock.json
-package.json
 sequence-diagram.svg
 tsconfig.json
-README.md
 logo.png
 npm-debug.log
 index.spec.ts
