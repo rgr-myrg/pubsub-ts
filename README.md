@@ -81,7 +81,7 @@ import {PubSub} from "pubsub-ts";
 
 class TransactionAgent extends PubSub.Subscriber {
     constructor() {
-        this.on('connectionChange', this.onConnected);
+        this.on('connectionChange', this.onConnection);
         this.on('withdrawal', this.onWithdrawal);
     }
 
